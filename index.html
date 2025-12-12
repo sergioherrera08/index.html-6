@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./style.css">
+
+  <title>Home</title>
+</head>
+
+<body>
+
+  <header class="header">
+    <p class="header__logo">Tu sitio de compras</p>
+
+    <nav class="header__nav">
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./contacto.html">Contacto</a></li>
+        <li>
+          <a href="./carrito.html" class="carrito-icono">
+            🛒 <span id="contador-carrito">0</span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="nav-list">
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Acerca de</a></li>
+        <li><a href="#">Servicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="titulo-home">Bienvenidos a la tienda de Sergio</h1>
+
+    <section class="productos-home">
+      <h2>Algunos de nuestros productos</h2>
+
+      <div class="contenedor-tarjetas">
+
+        <!-- Producto 1 -->
+        <article class="tarjeta-producto">
+          <h3>Personaje de serie inglesa</h3>
+          <img src="./img/personaje.png.jpg" alt="imagen de personaje" width="90" height="90">
+          <p>Precio: $80</p>
+          <button class="btn">Agregar al carrito</button>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="tarjeta-producto">
+          <h3>Pixel Mario</h3>
+          <img src="./img/mario.jpg.png" alt="imagen de mario pixel" width="100" height="100">
+          <p>Precio: $30</p>
+          <button class="btn">Agregar al carrito</button>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="tarjeta-producto">
+          <h3>Mario Pixel</h3>
+          <img src="./img/mariopixel.jpg.png" alt="imagen de mario pixel" width="100" height="100">
+          <p>Precio: $20</p>
+          <button class="btn">Agregar al carrito</button>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Esta página la diseñó Sergio</p>
+
+    <nav>
+      <ul>
+        <li>Instagram <img src="./img/instragramlogo.png.jpg" alt="" width="50" height="50"></li>
+      </ul>
+      <ul>
+        <li>Tiktok <img src="./img/tiktoklogo.png.png" alt="" width="50" height="50"></li>
+      </ul>
+      <ul>
+        <li>X <img src="./img/twitterlogo.png.png" alt="" width="50" height="50"></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <!-- JS del carrito -->
+  <script src="./funciones.carrito.js" type="module"></script>
+</body>
+</html>
+
+
+  <script type="module">
+  import { agregarAlCarrito } from "./funciones.carrito.js";
+
+  // Seleccionamos todas las tarjetas
+  const tarjetas = document.querySelectorAll(".tarjeta-producto");
+
+  tarjetas.forEach((tarjeta) => {
+    const btn = tarjeta.querySelector(".btn");
+
+    btn.addEventListener("click", () => {
+      const nombre = tarjeta.querySelector("h3").textContent.trim();
+      const precioTexto = tarjeta.querySelector("p").textContent;
+      const precio = Number(precioTexto.replace("Precio: $", "").trim());
+
+      // Objeto producto REAL
+      const producto = {
+        nombre,
+        precio
+      };
+
+      // Llamamos al carrito
+      agregarAlCarrito(producto);
+    });
+  });
+
+  mostrarMensaje("Producto agregado al carrito");
+
+</script>
+
+</html>
